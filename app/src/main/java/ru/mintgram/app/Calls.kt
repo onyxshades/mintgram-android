@@ -233,7 +233,7 @@ class CallManager(
         cur?.capturer?.switchCamera(null)
     }
 
-    fun toggleSpeaker() = setSpeaker(!speaker)
+    fun toggleSpeaker() = applySpeaker(!speaker)
 
     /** Пропала связь с сервером — сигналов больше не будет. */
     fun onDisconnected() {
@@ -555,7 +555,7 @@ class CallManager(
     private fun enterCallAudio(withVideo: Boolean) {
         if (!audioActive) { savedMode = audioManager.mode; audioActive = true }
         audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
-        setSpeaker(withVideo)
+        applySpeaker(withVideo)
     }
 
     private fun leaveCallAudio() {
@@ -567,7 +567,7 @@ class CallManager(
         speaker = false
     }
 
-    private fun setSpeaker(on: Boolean) {
+    private fun applySpeaker(on: Boolean) {
         speaker = on
         @Suppress("DEPRECATION")
         audioManager.isSpeakerphoneOn = on
